@@ -225,7 +225,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NumberTide/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NumberTideAction;
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "获取您的IDFA";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "NumberTide would like to access your IDFA to provide you with a better product experience.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -264,7 +264,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NumberTide/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NumberTideAction;
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "获取您的IDFA";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "NumberTide would like to access your IDFA to provide you with a better product experience.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
