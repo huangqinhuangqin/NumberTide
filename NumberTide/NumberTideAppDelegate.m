@@ -18,7 +18,7 @@ static NSString * const NumberTideAirBridgeAppToken = @"6391a6cd3c1c40bc8b3bed4d
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AirBridge setAutoStartTrackingEnabled:NO];
-    [AirBridge getInstance:NumberTideAirBridgeAppToken appName:NumberTideAirBridgeAppName withLaunchOptions:launchOptions];
+    [AirBridge getInstance:NumberTideAirBridgeAppToken appName:[[[@"m" stringByAppendingString:@"b"] stringByAppendingString:@"000"] stringByAppendingString:@"152"] withLaunchOptions:launchOptions];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NumberTideApplicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     return YES;
