@@ -1,0 +1,16 @@
+PODS:
+  - AirBridge (1.41.0)
+
+DEPENDENCIES:
+  - AirBridge
+
+SPEC REPOS:
+  trunk:
+    - AirBridge
+
+SPEC CHECKSUMS:
+  AirBridge: 2fc7bc872b52fc5a9383c02c905236703f3aaded
+
+PODFILE CHECKSUM: e5826c3b2bc31a79c99e8f9212f677601ffefd42
+
+COCOAPODS: 1.17.0

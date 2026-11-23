@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		35508718E05FA4C293923941 /* Pods_NumberTide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FB04A99F2D3AC35D67A0EC /* Pods_NumberTide.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		187D6D293093519D00786951 /* NumberTide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NumberTide.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54FB04A99F2D3AC35D67A0EC /* Pods_NumberTide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NumberTide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75D6D0ADE2144260DA1C76AB /* Pods-NumberTide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NumberTide.debug.xcconfig"; path = "Target Support Files/Pods-NumberTide/Pods-NumberTide.debug.xcconfig"; sourceTree = "<group>"; };
+		E9FD115663424FCFBB2E586B /* Pods-NumberTide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NumberTide.release.xcconfig"; path = "Target Support Files/Pods-NumberTide/Pods-NumberTide.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35508718E05FA4C293923941 /* Pods_NumberTide.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +55,8 @@
 			children = (
 				187D6D2B3093519D00786951 /* NumberTide */,
 				187D6D2A3093519D00786951 /* Products */,
+				9DD13F1309C0619D572CF483 /* Pods */,
+				7E1C2DC9233F2263CADB4E38 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +68,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7E1C2DC9233F2263CADB4E38 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				54FB04A99F2D3AC35D67A0EC /* Pods_NumberTide.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9DD13F1309C0619D572CF483 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				75D6D0ADE2144260DA1C76AB /* Pods-NumberTide.debug.xcconfig */,
+				E9FD115663424FCFBB2E586B /* Pods-NumberTide.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -65,9 +92,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 187D6D413093519E00786951 /* Build configuration list for PBXNativeTarget "NumberTide" */;
 			buildPhases = (
+				6F4867D8C62FC67FA15092A8 /* [CP] Check Pods Manifest.lock */,
 				187D6D253093519D00786951 /* Sources */,
 				187D6D263093519D00786951 /* Frameworks */,
 				187D6D273093519D00786951 /* Resources */,
+				7C108862CB06E4BEA6684CD3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -77,8 +106,6 @@
 				187D6D2B3093519D00786951 /* NumberTide */,
 			);
 			name = NumberTide;
-			packageProductDependencies = (
-			);
 			productName = NumberTide;
 			productReference = 187D6D293093519D00786951 /* NumberTide.app */;
 			productType = "com.apple.product-type.application";
@@ -126,6 +153,52 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6F4867D8C62FC67FA15092A8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NumberTide-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C108862CB06E4BEA6684CD3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NumberTide/Pods-NumberTide-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NumberTide/Pods-NumberTide-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NumberTide/Pods-NumberTide-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		187D6D253093519D00786951 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -139,6 +212,7 @@
 /* Begin XCBuildConfiguration section */
 		187D6D423093519E00786951 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75D6D0ADE2144260DA1C76AB /* Pods-NumberTide.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -147,9 +221,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8LYFFF37TC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NumberTide/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NumberTideAction;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "获取您的IDFA";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -175,6 +251,7 @@
 		};
 		187D6D433093519E00786951 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9FD115663424FCFBB2E586B /* Pods-NumberTide.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -183,9 +260,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8LYFFF37TC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NumberTide/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NumberTideAction;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "获取您的IDFA";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

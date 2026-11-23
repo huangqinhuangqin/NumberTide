@@ -17,14 +17,14 @@ on:
 env:
   APP_NAME: NumberTide
   PROJECT_DIR: .
-  XCODE_CONTAINER_TYPE: project
-  XCODE_CONTAINER: NumberTide.xcodeproj
+  XCODE_CONTAINER_TYPE: workspace
+  XCODE_CONTAINER: NumberTide.xcworkspace
   XCODE_SCHEME: NumberTide
   XCODE_CONFIGURATION: Release
   BUNDLE_ID: nu.NumberTide.de
   TEAM_ID: 8LYFFF37TC
   PROFILE_NAME: TideFB
-  USE_COCOAPODS: "false"
+  USE_COCOAPODS: "true"
   COCOAPODS_VERSION: "1.17.0"
   DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
 
