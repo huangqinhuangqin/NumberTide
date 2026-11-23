@@ -3,7 +3,6 @@
 #import <AirBridge/AirBridge.h>
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 
-static NSString * const NumberTideAirBridgeAppName = @"mb000152";
 static NSString * const NumberTideAirBridgeAppToken = @"6391a6cd3c1c40bc8b3bed4d5f80c2b7";
 
 @interface NumberTideAppDelegate ()
