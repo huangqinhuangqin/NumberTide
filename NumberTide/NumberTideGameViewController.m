@@ -1,6 +1,7 @@
 #import "NumberTideGameViewController.h"
 #import "NumberTideGameState.h"
 #import "NumberTideAudioManager.h"
+#import "NumberTideResultImageSaver.h"
 
 static CGFloat const NumberTideGameReferenceWidth = 750.0;
 static CGFloat const NumberTideGameReferenceHeight = 1334.0;
@@ -77,6 +78,7 @@ static CGRect NumberTideGameScaledFrame(CGRect frame, CGRect bounds)
 @property (nonatomic, strong) UIButton *numberTideResultPrimaryButton;
 @property (nonatomic, strong) UIButton *numberTideResultHomeButton;
 @property (nonatomic, strong) UIButton *numberTideResultRetryButton;
+@property (nonatomic, strong) UIButton *numberTideResultSaveButton;
 @property (nonatomic) BOOL numberTideResultIsSuccess;
 
 @end
@@ -764,8 +766,7 @@ static CGRect NumberTideGameScaledFrame(CGRect frame, CGRect bounds)
         self.numberTideResultStatTitleLabels = [NSMutableArray arrayWithCapacity:3];
         self.numberTideResultStatValueLabels = [NSMutableArray arrayWithCapacity:3];
         NSArray<NSString *> *titles = @[@"ROUNDS", @"CYCLES", @"ACTIONS"];
-        NSInteger completedRounds = MIN(MAX(0, self.numberTideState.numberTideRound - 1),
-                                        self.numberTideState.numberTideRoundLimit);
+        NSInteger completedRounds = [self numberTideCompletedRounds];
         NSArray<NSString *> *statistics = @[
             [NSString stringWithFormat:@"%02ld", (long)completedRounds],
             [NSString stringWithFormat:@"%02ld", (long)self.numberTideState.numberTideLoopProgress],
@@ -787,15 +788,20 @@ static CGRect NumberTideGameScaledFrame(CGRect frame, CGRect bounds)
         self.numberTideResultPrimaryButton = [self numberTideButtonWithImageNamed:primaryImage];
         self.numberTideResultHomeButton = [self numberTideButtonWithImageNamed:@"home 1"];
         self.numberTideResultRetryButton = [self numberTideButtonWithImageNamed:@"retry"];
+        self.numberTideResultSaveButton = [self numberTideButtonWithImageNamed:@"Down"];
+        self.numberTideResultSaveButton.accessibilityLabel = @"Save result image";
         [self.numberTideResultPrimaryButton addTarget:self action:@selector(numberTideResultPrimaryTapped)
                                       forControlEvents:UIControlEventTouchUpInside];
         [self.numberTideResultHomeButton addTarget:self action:@selector(numberTideResultHomeTapped)
                                    forControlEvents:UIControlEventTouchUpInside];
         [self.numberTideResultRetryButton addTarget:self action:@selector(numberTideResultRetryTapped)
                                     forControlEvents:UIControlEventTouchUpInside];
+        [self.numberTideResultSaveButton addTarget:self action:@selector(numberTideSaveResultTapped)
+                                   forControlEvents:UIControlEventTouchUpInside];
         [resultView addSubview:self.numberTideResultPrimaryButton];
         [resultView addSubview:self.numberTideResultHomeButton];
         [resultView addSubview:self.numberTideResultRetryButton];
+        [resultView addSubview:self.numberTideResultSaveButton];
     }
     else
     {
@@ -804,8 +810,7 @@ static CGRect NumberTideGameScaledFrame(CGRect frame, CGRect bounds)
         self.numberTideResultStatTitleLabels = [NSMutableArray arrayWithCapacity:3];
         self.numberTideResultStatValueLabels = [NSMutableArray arrayWithCapacity:3];
         NSArray<NSString *> *titles = @[@"ROUNDS", @"CYCLES", @"ACTIONS"];
-        NSInteger completedRounds = MIN(MAX(0, self.numberTideState.numberTideRound - 1),
-                                        self.numberTideState.numberTideRoundLimit);
+        NSInteger completedRounds = [self numberTideCompletedRounds];
         NSArray<NSString *> *statistics = @[
             [NSString stringWithFormat:@"%02ld / %02ld", (long)completedRounds,
              (long)self.numberTideState.numberTideRoundLimit],
@@ -875,8 +880,9 @@ static CGRect NumberTideGameScaledFrame(CGRect frame, CGRect bounds)
         }
         self.numberTideResultPrimaryButton.frame = NumberTideGameScaledFrame(
             self.numberTideState.numberTideLevel < 8 ? CGRectMake(108, 1037, 534, 143) : CGRectMake(147, 1044, 457, 126), bounds);
-        self.numberTideResultHomeButton.frame = NumberTideGameScaledFrame(CGRectMake(153, 1185, 121, 121), bounds);
-        self.numberTideResultRetryButton.frame = NumberTideGameScaledFrame(CGRectMake(316, 1185, 273, 121), bounds);
+        self.numberTideResultHomeButton.frame = NumberTideGameScaledFrame(CGRectMake(90, 1185, 121, 121), bounds);
+        self.numberTideResultRetryButton.frame = NumberTideGameScaledFrame(CGRectMake(238.5, 1185, 273, 121), bounds);
+        self.numberTideResultSaveButton.frame = NumberTideGameScaledFrame(CGRectMake(539, 1185, 121, 121), bounds);
     }
     else
     {
@@ -920,6 +926,73 @@ static CGRect NumberTideGameScaledFrame(CGRect frame, CGRect bounds)
     }
     self.numberTideResultReasonLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:22.0 * scale];
     self.numberTideResultSubtitleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:25.0 * scale];
+}
+
+- (NSInteger)numberTideCompletedRounds
+{
+    return MIN(MAX(0, self.numberTideState.numberTideRound - 1),
+               self.numberTideState.numberTideRoundLimit);
+}
+
+- (void)numberTideSaveResultTapped
+{
+    UIImage *image = [self numberTideResultImage];
+    if (!image)
+    {
+        [self numberTideShowSaveResultSuccess:NO permissionDenied:NO error:nil];
+        return;
+    }
+
+    __weak typeof(self) weakSelf = self;
+    [NumberTideResultImageSaver numberTideSaveImage:image
+                                         completion:^(BOOL success,
+                                                      BOOL permissionDenied,
+                                                      NSError *error) {
+        [weakSelf numberTideShowSaveResultSuccess:success
+                                permissionDenied:permissionDenied
+                                           error:error];
+    }];
+}
+
+- (UIImage *)numberTideResultImage
+{
+    if (!self.numberTideResultView || !self.numberTideResultIsSuccess)
+    {
+        return nil;
+    }
+    return [NumberTideResultImageSaver
+        numberTideResultImageForLevel:self.numberTideState.numberTideLevel
+                                title:self.numberTideState.numberTideTargetTitle
+                                board:self.numberTideState.numberTideBoard
+                               rounds:[self numberTideCompletedRounds]
+                               cycles:self.numberTideState.numberTideLoopProgress
+                              actions:self.numberTideState.numberTideUsedActions];
+}
+
+- (void)numberTideShowSaveResultSuccess:(BOOL)success
+                       permissionDenied:(BOOL)permissionDenied
+                                  error:(NSError *)error
+{
+    NSString *title = success ? @"RESULT SAVED" : @"UNABLE TO SAVE";
+    NSString *message = success ? @"Your result was saved to Photos." :
+        (permissionDenied ? @"Allow Photos access in Settings to save results." :
+                            (error.localizedDescription ?: @"Please try saving the result again."));
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                     message:message
+                                                              preferredStyle:UIAlertControllerStyleAlert];
+    if (permissionDenied)
+    {
+        [alert addAction:[UIAlertAction actionWithTitle:@"SETTINGS"
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(__unused UIAlertAction *action) {
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+        }]];
+    }
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                style:UIAlertActionStyleDefault
+                                              handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)numberTideResultPrimaryTapped
