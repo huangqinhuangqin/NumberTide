@@ -1,6 +1,8 @@
 #import "NumberTideSceneDelegate.h"
-#import "NumberTideHomeViewController.h"
+#import "NumberTideAppDelegate.h"
+#import "NumberTideLunchViewController.h"
 #import "NumberTideAudioManager.h"
+#import <NumberTideSDK/NumberTideSDK.h>
 
 @implementation NumberTideSceneDelegate
 
@@ -14,10 +16,27 @@
     }
 
     UIWindow *window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
-    window.rootViewController = [[NumberTideHomeViewController alloc] init];
+    window.rootViewController = [[NumberTideLunchViewController alloc] init];
     self.window = window;
     [window makeKeyAndVisible];
-    [NumberTideAudioManager.numberTideSharedManager numberTideStartBackgroundMusic];
+
+    [(NumberTideAppDelegate *)UIApplication.sharedApplication.delegate
+        numberTideHandleSceneConnectionOptions:connectionOptions];
+}
+
+- (void)sceneDidBecomeActive:(UIScene *)scene {
+    if (NumberTideSDK.numberTideShared.numberTideStarted)
+        [NumberTideSDK.numberTideShared numberTideAppDidBecomeActive];
+}
+
+- (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts {
+    [(NumberTideAppDelegate *)UIApplication.sharedApplication.delegate
+        numberTideHandleOpenURLContexts:URLContexts];
+}
+
+- (void)scene:(UIScene *)scene continueUserActivity:(NSUserActivity *)userActivity {
+    [(NumberTideAppDelegate *)UIApplication.sharedApplication.delegate
+        numberTideHandleUserActivity:userActivity];
 }
 
 @end

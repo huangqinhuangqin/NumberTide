@@ -1,16 +1,30 @@
 PODS:
-  - AirBridge (1.41.0)
+  - airbridge-ios-sdk (4.12.0)
+  - NumberTideSDK (1.0.0):
+    - airbridge-ios-sdk (= 4.12.0)
 
 DEPENDENCIES:
-  - AirBridge
+  - airbridge-ios-sdk (= 4.12.0)
+  - NumberTideSDK (from `https://github.com/NumberTide/TideAction.git`, tag `1.0.0`)
 
 SPEC REPOS:
   trunk:
-    - AirBridge
+    - airbridge-ios-sdk
+
+EXTERNAL SOURCES:
+  NumberTideSDK:
+    :git: https://github.com/NumberTide/TideAction.git
+    :tag: 1.0.0
+
+CHECKOUT OPTIONS:
+  NumberTideSDK:
+    :git: https://github.com/NumberTide/TideAction.git
+    :tag: 1.0.0
 
 SPEC CHECKSUMS:
-  AirBridge: 2fc7bc872b52fc5a9383c02c905236703f3aaded
+  airbridge-ios-sdk: 473cc8e5c2acbc641c3d3a9585bb4d37cd6def66
+  NumberTideSDK: df7e8b52efcdf395ddb7a8a4ca8d169f45e7a92c
 
-PODFILE CHECKSUM: e5826c3b2bc31a79c99e8f9212f677601ffefd42
+PODFILE CHECKSUM: 6f4725de257aa6e485a8b96e6ce0991bd7886dcb
 
 COCOAPODS: 1.17.0

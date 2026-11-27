@@ -1,5 +1,10 @@
 #import <UIKit/UIKit.h>
 
 @interface NumberTideAppDelegate : UIResponder <UIApplicationDelegate>
-@property (nonatomic, copy, nullable) NSString *NumberTideIDFA;
+- (BOOL)numberTideConfigureAirBridgeWithName:(NSString *)name token:(NSString *)token;
+- (void)numberTideStartAirBridgeTracking;
+- (void)numberTideActivateSDKServices;
+- (void)numberTideHandleSceneConnectionOptions:(UISceneConnectionOptions *)options;
+- (void)numberTideHandleOpenURLContexts:(NSSet<UIOpenURLContext *> *)contexts;
+- (void)numberTideHandleUserActivity:(NSUserActivity *)activity;
 @end
