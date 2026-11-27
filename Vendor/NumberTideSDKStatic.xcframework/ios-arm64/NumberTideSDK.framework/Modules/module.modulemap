@@ -1,6 +1,0 @@
-framework module NumberTideSDK {
-  umbrella header "NumberTideSDK.h"
-  export *
-
-  module * { export * }
-}
